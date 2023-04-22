@@ -1,27 +1,16 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
-const router = require("./routes/routes");
-const axios = require('axios');
-const cors = require("cors");
+const postRouter = require('./routes/post');
+const getRouter = require('./routes/get')
+const cors = require('cors');
+
+require('dotenv').config();
 
 app.use(express.json());
 app.use(cors());
-app.use('/api', router);
-
-app.get('/', (req, res) => {
-  res.send("Server is running");
-});
-
-app.get('/test', (req, res) => {
-   axios.post('http://localhost:5000/api/test')
-  .then(res => {
-    console.log(res.data);
-  })
-   .catch(error => {
-     console.error(error);
-   });
-});
+app.use('/api', postRouter);
+app.use('', getRouter)
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
