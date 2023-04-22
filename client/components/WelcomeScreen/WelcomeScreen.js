@@ -1,13 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 
 const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Flora Finder</Text>
+      <Image
+        //style={styles.logo}
+        source={require('../../media/logo.png')}
+      />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('NextScreen')}>
+        onPress={() => navigation.navigate('Main')}>
         <Text style={styles.buttonText}>Start</Text>
       </TouchableOpacity>
     </View>
@@ -25,6 +29,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  // logo: {
+  //   width: 100,
+  //   height: 100,
+  //   borderRadius: 50,
+  //   marginBottom: 20,
+  //   resizeMode: 'cover',
+  // },
   button: {
     backgroundColor: '#5DB075',
     width: Dimensions.get('window').width * 0.9,
