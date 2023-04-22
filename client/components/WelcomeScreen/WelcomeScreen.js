@@ -6,7 +6,7 @@ const WelcomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Flora Finder</Text>
       <Image
-        //style={styles.logo}
+        style={styles.logo}
         source={require('../../media/logo.png')}
       />
       <TouchableOpacity
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  // logo: {
-  //   width: 100,
-  //   height: 100,
-  //   borderRadius: 50,
-  //   marginBottom: 20,
-  //   resizeMode: 'cover',
-  // },
+  logo: {
+    width: 150,
+    height: 150,
+    borderRadius: 50,
+    marginBottom: 20,
+    resizeMode: 'cover',
+  },
   button: {
     backgroundColor: '#5DB075',
     width: Dimensions.get('window').width * 0.9,
