@@ -16,7 +16,6 @@ const Test = () => {
           body: JSON.stringify({}),
         }
         const fetchData = async () => {
-          console.log(routes.test);
           await fetch(routes.test, requestOptions)
             .then((res) => {
               return res.json();

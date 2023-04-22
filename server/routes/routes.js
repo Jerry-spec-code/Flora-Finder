@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 
 router.get('/', (req, res) => {
-    res.send('Server is running');
+    res.send({message : "Server"});
 });
 
 router.get('/test', (req, res) => {
@@ -17,11 +17,11 @@ router.get('/test', (req, res) => {
     res.send('Test successful');
 });
 
-router.get('/test', (req, res) => {
+router.post('/test', (req, res) => {
     res.send({message : "This is a test"});
 })
 
-router.get('/image', (req, res) => {
+router.post('/image', (req, res) => {
     const bodyFormData = new FormData();
     const url = `https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&api-key=${process.env.API_KEY}`;
     bodyFormData.append('images', req.body.file);
