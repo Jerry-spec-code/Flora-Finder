@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/test', (req, res) => {
-    res.send("This is a test");
+    res.send({message : "This is a test"});
 })
 
 module.exports = router; 
