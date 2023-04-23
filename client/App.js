@@ -7,6 +7,8 @@ import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen.js';
 import BottomTabNavigator from './components/BottomNavbar/BottomNavbar.js';
 import CameraScreen from './components/CameraScreen/CameraScreen.js';
 import Test from './components/Test/Test.js';
+import PlantScreen from './components/PlantScreen/PlantScreen.js';
+import BottomNavbar from './components/BottomNavbar/BottomNavbar.js';
 
 
 const Stack = createStackNavigator();
@@ -18,7 +20,8 @@ export default function App() {
       <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Camera" component={CameraScreen} />
-        
+        <Stack.Screen name="Home" component={BottomNavbar} options={{ headerShown: false }} />
+        <Stack.Screen name="Plant" component={PlantScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
