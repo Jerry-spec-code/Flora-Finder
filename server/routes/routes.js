@@ -28,11 +28,9 @@ router.post('/test', (req, res) => {
 })
 
 router.post('/image', (req, res) => {
-    console.log('made it here 1');
     // const bodyFormData = new FormData();
-    // const url = `https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&api-key=${process.env.API_KEY}`;
+    const url = `https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&api-key=${process.env.API_KEY}`;
     // bodyFormData.append('images', req.body);
-    console.log('made it here 2');
     axios({
       method: 'post',
       url: url,
@@ -48,7 +46,6 @@ router.post('/image', (req, res) => {
         console.error(error);
         res.send({message : 'Species not found.'});
     });
-    console.log('made it here 4');
 });
 
 router.get('/imageTest', (req, res) => {

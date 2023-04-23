@@ -13,19 +13,14 @@ const Test = () => {
       if(clicked) {
         setClicked(false);
 
-        const formData = new FormData();
-        formData.append('images', {
-          uri: result.uri,
-          name: 'image.jpg',
-          type: 'image/jpeg',
-        });
-
-        const requestOptions = {
-          method: "POST",
-          body: formData,
-        }
-
         const fetchData = async () => {
+          const formData = new FormData();
+          formData.append('images', result.uri);
+          const requestOptions = {
+            method: "POST",
+            body: formData,
+            headers: {'Content-Type': 'multipart/form-data' }
+          }
           await fetch(routes.image, requestOptions)
             .then((res) => {
               return res.json();
