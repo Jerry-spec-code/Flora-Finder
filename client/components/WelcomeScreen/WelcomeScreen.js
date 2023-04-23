@@ -11,7 +11,7 @@ const WelcomeScreen = ({ navigation }) => {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Main', { screen: 'Camera' })}>
+        onPress={() => navigation.navigate('Camera')}>
 
         <Text style={styles.buttonText}>Start</Text>
       </TouchableOpacity>

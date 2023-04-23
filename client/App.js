@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen.js';
 import BottomTabNavigator from './components/BottomNavbar/BottomNavbar.js';
+import CameraScreen from './components/CameraScreen/CameraScreen.js';
+
 
 const Stack = createStackNavigator();
 
@@ -13,11 +15,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen
-          name="Main"
-          children={() => <BottomTabNavigator initialRoute="Camera" />}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="Camera" component={CameraScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

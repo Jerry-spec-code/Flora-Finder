@@ -2,10 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 const CameraScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
+
+  <NavigationContainer>
+  <Stack.Navigator>
+        <Stack.Screen name="Camera" component={CameraScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
 
   useEffect(() => {
     (async () => {
@@ -60,14 +70,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    flex: 0.5,
-    backgroundColor: '#5DB075',
-    borderRadius: 5,
-    padding: 10,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
+  width: 60,
+  height: 60,
+  backgroundColor: 'white',
+  borderRadius: 30,
+  alignSelf: 'center',
+  marginBottom: 20,
+  borderWidth: 5,
+  borderColor: 'rgba(0, 0, 0, 0.2)',
   },
+
   text: {
     fontSize: 18,
     color: 'white',
