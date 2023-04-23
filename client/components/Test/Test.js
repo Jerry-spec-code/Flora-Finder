@@ -14,7 +14,7 @@ const Test = () => {
         setClicked(false);
 
         const formData = new FormData();
-        formData.append('image', {
+        formData.append('images', {
           uri: result.uri,
           name: 'image.jpg',
           type: 'image/jpeg',
@@ -22,7 +22,6 @@ const Test = () => {
 
         const requestOptions = {
           method: "POST",
-          headers: { "Content-Type": "application/json"},
           body: formData,
         }
 
@@ -44,7 +43,6 @@ const Test = () => {
     }, [clicked]);
     
     const handleButtonClick = async () => {
-      setClicked(true);
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -55,6 +53,7 @@ const Test = () => {
       if (!result.cancelled) {
         // Handle the selected image
         setResult(result);
+        setClicked(true);
         console.log(result.uri);
       }
     };

@@ -12,6 +12,10 @@ import Test from './components/Test/Test.js';
 const Stack = createStackNavigator();
 
 export default function App() {
+  
+  return (
+    <Test />
+  )
 
   return (
     <NavigationContainer>
