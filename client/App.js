@@ -6,11 +6,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen.js';
 import BottomTabNavigator from './components/BottomNavbar/BottomNavbar.js';
 import CameraScreen from './components/CameraScreen/CameraScreen.js';
+import Test from './components/Test/Test.js';
 
 
 const Stack = createStackNavigator();
 
 export default function App() {
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
