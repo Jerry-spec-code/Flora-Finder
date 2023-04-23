@@ -7,15 +7,25 @@ import * as ImagePicker from 'expo-image-picker';
 const Test = () => {
     const [clicked, setClicked] = useState(false);
     const [testMessage, setTestMessage] = useState("");
+    const [result, setResult] = useState({});
   
     useEffect(() => {
       if(clicked) {
         setClicked(false);
+
+        const formData = new FormData();
+        formData.append('image', {
+          uri: result.uri,
+          name: 'image.jpg',
+          type: 'image/jpeg',
+        });
+
         const requestOptions = {
           method: "POST",
           headers: { "Content-Type": "application/json"},
-          body: JSON.stringify({}),
+          body: formData,
         }
+
         const fetchData = async () => {
           await fetch(routes.image, requestOptions)
             .then((res) => {
@@ -44,6 +54,7 @@ const Test = () => {
     
       if (!result.cancelled) {
         // Handle the selected image
+        setResult(result);
         console.log(result.uri);
       }
     };
