@@ -14,12 +14,12 @@ const Test = () => {
         setClicked(false);
 
         const fetchData = async () => {
-          const formData = new FormData();
-          formData.append('images', result.uri);
+          // const formData = new FormData();
+          // formData.append('images', result.uri);
           const requestOptions = {
             method: "POST",
-            body: formData,
-            headers: {'Content-Type': 'multipart/form-data' }
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({ "imageUrl": result.uri }),
           }
           await fetch(routes.image, requestOptions)
             .then((res) => {
@@ -38,19 +38,19 @@ const Test = () => {
     }, [clicked]);
     
     const handleButtonClick = async () => {
-      const result = await ImagePicker.launchImageLibraryAsync({
+      await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [1, 1],
         quality: 0.7,
+      }).then((result) => {
+        if (!result.cancelled) {
+          // Handle the selected image
+          setResult(result);
+          setClicked(true);
+          console.log(result.uri);
+        }
       });
-    
-      if (!result.cancelled) {
-        // Handle the selected image
-        setResult(result);
-        setClicked(true);
-        console.log(result.uri);
-      }
     };
   
     return (

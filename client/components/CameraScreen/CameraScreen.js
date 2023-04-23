@@ -3,11 +3,16 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { Ionicons } from '@expo/vector-icons';
+import routes from '../../config/api';
+import data from '../../config/data';
 
 const CameraScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [latestPhoto, setLatestPhoto] = useState(null);
+  const [uri, setUri] = useState(null);
+  const [clicked, setClicked] = useState(false);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -16,6 +21,32 @@ const CameraScreen = ({ navigation }) => {
       fetchLatestPhoto();
     })();
   }, []);
+
+  useEffect(() => {
+    if(clicked) {
+      setClicked(false);
+      
+      const fetchData = async () => {
+        const requestOptions = {
+          method: "POST",
+          headers: {'Content-Type': 'application/json' },
+          body: JSON.stringify({ "imageUrl": uri }),
+        }
+        await fetch(routes.image, requestOptions)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            setMessage(data.message);
+            console.log(data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      };
+      fetchData();
+    }
+  }, [clicked]);
 
   const fetchLatestPhoto = async () => {
     const { status } = await MediaLibrary.requestPermissionsAsync();
@@ -42,12 +73,10 @@ const CameraScreen = ({ navigation }) => {
       const asset = await MediaLibrary.createAssetAsync(photo.uri);
       console.log('Photo saved to gallery:', asset.uri);
 
+      setUri(photo.uri);
+      setClicked(true);
       fetchLatestPhoto();
     }
-  };
-
-  const goToPlantScreen = () => {
-    navigation.navigate('PlantScreen');
   };
 
    if (hasPermission === null) {
@@ -67,7 +96,7 @@ const CameraScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.flowerButtonContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Plant')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Plant', {message: message})}>
           <Ionicons name="flower-outline" size={32} color="white" />
         </TouchableOpacity>
       </View>

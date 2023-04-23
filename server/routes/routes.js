@@ -28,13 +28,15 @@ router.post('/test', (req, res) => {
 })
 
 router.post('/image', (req, res) => {
-    // const bodyFormData = new FormData();
+    const imageName = 'dandy-image';
+    const file = fs.createReadStream(path.join(__dirname, `public/${imageName}.jpeg`));
+    const bodyFormData = new FormData();
     const url = `https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&api-key=${process.env.API_KEY}`;
-    // bodyFormData.append('images', req.body);
+    bodyFormData.append('images', file);
     axios({
       method: 'post',
       url: url,
-      data: req.body,
+      data: bodyFormData,
       headers: {'Content-Type': 'multipart/form-data' }
     })
     .then(response => {

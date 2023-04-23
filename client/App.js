@@ -7,6 +7,7 @@ import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen.js';
 import BottomTabNavigator from './components/BottomNavbar/BottomNavbar.js';
 import CameraScreen from './components/CameraScreen/CameraScreen.js';
 import Test from './components/Test/Test.js';
+import Test2 from './components/Test/Test2.js';
 import PlantScreen from './components/PlantScreen/PlantScreen.js';
 import BottomNavbar from './components/BottomNavbar/BottomNavbar.js';
 
@@ -14,10 +15,6 @@ import BottomNavbar from './components/BottomNavbar/BottomNavbar.js';
 const Stack = createStackNavigator();
 
 export default function App() {
-  
-  return (
-    <Test />
-  )
 
   return (
     <NavigationContainer>

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-const PlantScreen = () => {
+const PlantScreen = ({route}) => {
+  const { message } = route.params;
   return (
     <View style={styles.container}>
-      <Text>Plant Screen</Text>
+      <Text>{message}</Text>
     </View>
   );
 };
