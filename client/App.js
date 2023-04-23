@@ -14,6 +14,10 @@ import BottomNavbar from './components/BottomNavbar/BottomNavbar.js';
 const Stack = createStackNavigator();
 
 export default function App() {
+  
+  return (
+    <Test />
+  )
 
   return (
     <NavigationContainer>
