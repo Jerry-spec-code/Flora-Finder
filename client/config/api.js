@@ -3,6 +3,7 @@ const API_ROOT = NODE_ENV === 'production' ? '/api' : `http://${IP_ADDRESS}:5000
 
 const routes = {
     test: `${API_ROOT}/test`,
+    image: `${API_ROOT}/image`,
 }
 
 export default routes; 
