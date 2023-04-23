@@ -44,11 +44,13 @@ router.post('/image', (req, res) => {
     })
     .catch(error => {
         console.error(error);
+        res.send({message : 'Species not found.'});
     });
 });
 
 router.get('/imageTest', (req, res) => {
-    const file = fs.createReadStream(path.join(__dirname, 'public/dandy-image.jpeg'));
+    const imageName = 'dandy-image';
+    const file = fs.createReadStream(path.join(__dirname, `public/${imageName}.jpeg`));
     const bodyFormData = new FormData();
     const url = `https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&api-key=${process.env.API_KEY}`;
     bodyFormData.append('images', file);
@@ -65,6 +67,7 @@ router.get('/imageTest', (req, res) => {
     })
     .catch(error => {
         console.error(error);
+        res.send({message : 'Species not found.'});
     });
 });
 
