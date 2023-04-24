@@ -1,5 +1,8 @@
 # Flora-Finder
 
+![image](https://user-images.githubusercontent.com/103216050/234118945-1e14c2a1-0000-4645-9efa-8230fd91d234.png)
+
+
 # Summary
 A plant identification app built for LA Hacks 2023
 
