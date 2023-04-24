@@ -7,9 +7,12 @@ const fs = require('fs');
 const path = require('path');
 
 const { parseFloraData } = require('../service/parse');
+const { upload, destPath } = require('../middleware/upload');
+
+
 
 router.get('/', (req, res) => {
-    res.send({message : "Server"});
+    res.send({message : 'Server'});
 });
 
 router.get('/test', (req, res) => {
@@ -27,9 +30,9 @@ router.post('/test', (req, res) => {
     res.send({message : "This is a test"});
 })
 
-router.post('/image', (req, res) => {
-    const imageName = 'dandy-image';
-    const file = fs.createReadStream(path.join(__dirname, `public/${imageName}.jpeg`));
+router.post('/image', upload.single('image'), (req, res) => {
+    const imageName = req.file.originalname;
+    const file = fs.createReadStream(path.join(__dirname, '..', `${destPath}${imageName}`));
     const bodyFormData = new FormData();
     const url = `https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&api-key=${process.env.API_KEY}`;
     bodyFormData.append('images', file);
@@ -51,8 +54,8 @@ router.post('/image', (req, res) => {
 });
 
 router.get('/imageTest', (req, res) => {
-    const imageName = 'dandy-image';
-    const file = fs.createReadStream(path.join(__dirname, `public/${imageName}.jpeg`));
+    const imageName = 'Sunflower_sky_backdrop.jpeg';
+    const file = fs.createReadStream(path.join(__dirname, '..', `public/${imageName}`));
     const bodyFormData = new FormData();
     const url = `https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&api-key=${process.env.API_KEY}`;
     bodyFormData.append('images', file);

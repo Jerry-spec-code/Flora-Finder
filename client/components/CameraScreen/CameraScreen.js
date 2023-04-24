@@ -4,14 +4,14 @@ import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { Ionicons } from '@expo/vector-icons';
 import routes from '../../config/api';
-import data from '../../config/data';
+import axios from 'axios';
 
 const CameraScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [latestPhoto, setLatestPhoto] = useState(null);
-  const [uri, setUri] = useState(null);
-  const [clicked, setClicked] = useState(false);
+  const [imageUri, setImageUri] = useState(null);
+  const [uploaded, setUploaded] = useState(false);
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
@@ -23,30 +23,31 @@ const CameraScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    if(clicked) {
-      setClicked(false);
+    if(uploaded) {
+      setUploaded(false);
       
       const fetchData = async () => {
-        const requestOptions = {
-          method: "POST",
-          headers: {'Content-Type': 'application/json' },
-          body: JSON.stringify({ "imageUrl": uri }),
-        }
-        await fetch(routes.image, requestOptions)
-          .then((res) => {
-            return res.json();
-          })
-          .then((data) => {
+        if (imageUri) {
+          const formData = new FormData();
+          formData.append('image', {
+            uri: imageUri,
+            name: 'image.jpg',
+            type: 'image/jpeg',
+          });
+      
+          try {
+            const response = await axios.post(routes.image, formData);
+            const data = response.data;
             setMessage(data.message);
             console.log(data);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+          } catch (error) {
+            console.error(error);
+          }
+        }
       };
       fetchData();
     }
-  }, [clicked]);
+  }, [uploaded]);
 
   const fetchLatestPhoto = async () => {
     const { status } = await MediaLibrary.requestPermissionsAsync();
@@ -73,9 +74,9 @@ const CameraScreen = ({ navigation }) => {
       const asset = await MediaLibrary.createAssetAsync(photo.uri);
       console.log('Photo saved to gallery:', asset.uri);
 
-      setUri(photo.uri);
-      setClicked(true);
       fetchLatestPhoto();
+      setImageUri(photo.uri);
+      setUploaded(true);
     }
   };
 

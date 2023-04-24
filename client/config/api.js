@@ -1,4 +1,5 @@
-const { IP_ADDRESS, NODE_ENV } = require('../env.js');
+const NODE_ENV = process.env.NODE_ENV;
+const IP_ADDRESS = process.env.IP_ADDRESS;
 const API_ROOT = NODE_ENV === 'production' ? '/api' : `http://${IP_ADDRESS}:5000/api`;
 
 const routes = {
